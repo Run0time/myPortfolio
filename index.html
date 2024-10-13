@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My || Portfolio</title>
+    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="icon" href="icon.png">
+    <script src="bootstrap.bundle.js"></script>
+    
+
+   <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            background-color: black;
+            color: white;
+            font-family: Georgia, serif;
+            
+        }
+
+        /* Navigation */
+        .nav-container {
+            background-color: black;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            transition: transform 0.3s ease; /* Smooth animation */
+        }
+
+        /* Navigation Links */
+        .center-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .center-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .center-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: red;
+            transition: width 0.3s ease;
+        }
+      
+
+        .center-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+            /* Hide default navigation */
+            .nav-container {
+            
+                height: 100%;
+                width: 250px;
+                background-color:black;
+                gap: 20px;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding-top: 60px;
+                transform: translateX(-250px); /* Initially off-screen */
+            }
+
+            /* Show links in column for mobile */
+            .center-links {
+                flex-direction: column;
+                width: 100%;
+                padding-left: 15px;
+                padding-top: 10px;
+            }
+
+            /* Slide navigation into view */
+            .nav-container.open {
+                transform: translateX(0);
+            }
+
+            /* Toggle button */
+            .nav-toggle {
+            
+                font-size: 24px;
+                color: #333;
+                cursor: pointer;
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 3;
+                display: block; /* Ensure toggle is shown on mobile */
+            }
+
+            /* Circular Image */
+            .nav-image {
+                width: 50px; /* Set desired width */
+                height: 50px; /* Set desired height */
+                border-radius: 50%; /* Make it circular */
+                position: fixed; /* Keep it fixed */
+                right: 50px; /* Position on the right */
+                top: 10px; /* Position from the top */
+                object-fit: cover; /* Ensure image fits well within circle */
+                cursor: pointer; /* Change cursor to pointer */
+                z-index: 3; /* Ensure it appears above other elements */
+            }
+        }
+
+        /* Hide image on desktop */
+        @media screen and (min-width: 769px) {
+            .nav-image {
+                display: none; /* Hide image in desktop view */
+
+            }
+        }
+        
+
+        /* Main Content */
+        .main-content {
+            padding: 16px;
+            margin-top: 50px; /* To prevent content from being hidden behind the nav */
+        }
+        .color-fix
+        {
+            color: white;
+            font-family: Georgia, serif;
+            font-size: 17px;
+            padding: 0px 5px;
+        }
+        .color-red
+        {
+            color:red;
+        }
+        .img-responsive {
+    width: 100%; /* Full width for the image */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 500px; /* Set a maximum width if needed */
+}
+
+/* Optional: Add responsiveness for larger screens */
+@media (min-width: 768px) {
+    .img-responsive {
+        max-width: 500px; /* Maintain original size for larger screens */
+    }
+}
+
+
+/* Mobile view adjustments */
+@media (max-width: 767px) {
+    .img {
+        margin-top: 5px;
+        width: 100%; /* Set width to 100% for mobile screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+.position
+{
+    position: absolute;
+    right: 200px;
+}
+.position_set
+{
+    display: none;
+}
+@media (max-width: 767px) {
+    .position_set {
+        display: block;
+        position: absolute;
+        right: 160px;
+        top: 20px;
+    }
+}
+.set
+{
+    margin-top: 120px;
+}
+@media (max-width: 767px) {
+    .set {
+        margin-top: 0px;
+    }
+}
+
+.tab-container {
+    width: 90%;       /* Use a percentage for responsive behavior */
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center the container */
+    padding: 10px;    /* Add padding for better spacing */
+}
+
+/* Media Query for Tablet and Small Desktop (up to 1024px) */
+@media (max-width: 1024px) {
+    .tab-container {
+        padding: 15px; /* Increase padding for better spacing on larger screens */
+    }
+}
+.tab-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tab-links a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    position: relative; /* Create a positioning context for the pseudo-element */
+}
+
+.tab-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Start with zero width */
+    height: 2px; /* Height of the underline */
+    background-color: red; /* Color of the underline */
+    transition: width 0.3s ease; /* Animation for the width */
+}
+
+.tab-links a:hover::after {
+    width: 100%; /* Expand to full width on hover */
+}
+
+.tab-links .active a::after {
+    width: 100%; /* Ensure the active tab has the underline fully visible */
+}
+
+.tab-content {
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.tab {
+    display: none; /* Hide all tabs initially */
+}
+
+.tab.active {
+    display: block; /* Show the active tab */
+}
+
+.tab-links .active a {
+   
+    font-weight: bold;
+}
+
+.tab-content {
+    /* border: 1px solid #ddd; */
+    border-radius: 5px;
+    padding: 15px;
+    /* background: #fff; */
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+.card {
+    background-color: rgb(86, 85, 85); /* Card background color */
+    color: white;           /* Text color */
+    border-radius: 5px;    /* Rounded corners */
+    padding: 20px;         /* Padding inside the card */
+    text-align: center;     /* Center the text */
+    width: 300px;          /* Fixed width for the card */
+    margin: 20px auto;     /* Center the card with margin */
+    transition: background-color 0.3s; /* Smooth background transition on hover */
+}
+.cards {
+    background-color: rgb(86, 85, 85); /* Card background color */
+    color: white;           /* Text color */
+    border-radius: 5px;    /* Rounded corners */
+    padding: 20px;         /* Padding inside the card */
+    text-align: center;     /* Center the text */
+    width: 300px;          /* Fixed width for the card */
+    margin: 20px auto;     /* Center the card with margin */
+    transition: background-color 0.3s; /* Smooth background transition on hover */
+}
+.card-icon {
+    margin-bottom: 15px; /* Space between icon and text */
+}
+
+.learn-more {
+    display: inline-block; /* Make the link block-like */
+    margin-top: 10px;     /* Space above the link */
+    color: white;         /* Link color */
+    text-decoration: none; /* Underline the link */
+      /* Bold font for the link */
+    transition: color 0.3s, margin-top 0.3s; /* Smooth color and margin transition on hover */
+}
+
+.learn-more:hover {
+    color: white; /* Change link color on hover */
+    margin-top: 5px; /* Reduce margin on hover */
+}
+
+.cards:hover {
+    background-color: red; /* Change background to transparent red on hover */
+    margin-top: -5px;
+}
+ /* Custom CSS */
+ .carousel img {
+      width: 70px;
+      max-height: 70px;
+      border-radius: 50%;
+      margin-right: 1rem;
+      overflow: hidden;
+    }
+
+    .carousel-inner {
+      padding: 1em;
+    }
+
+    @media screen and (min-width: 576px) {
+      .carousel-inner {
+        display: flex;
+        width: 90%;
+        margin-inline: auto;
+        padding: 1em 0;
+        overflow: hidden;
+      }
+
+      .carousel-item {
+        display: block;
+        margin-right: 0;
+        flex: 0 0 calc(100% / 2);
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .carousel-item {
+        display: block;
+        margin-right: 0;
+        flex: 0 0 calc(100% / 3);
+      }
+    }
+
+    .carousel .card {
+      margin: 0 0.5em;
+      border: 0;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 3rem;
+      height: 3rem;
+      background-color: grey;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .container-fluids {
+            
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        /* Wrapper for the images */
+        .wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            height: 300px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .before, .after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .before {
+            left: 0;
+            clip-path: inset(0 50% 0 0); /* Start by showing 50% of the before image */
+        }
+        .after {
+            right: 0;
+            clip-path: inset(0 0 0 50%); /* Start by showing 50% of the after image */
+        }
+        .content-image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        /* Scroller styling */
+        .scroller {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid white; /* Scroller border color */
+            background-color: transparent; /* Scroller background color */
+            z-index: 10;
+            cursor: ew-resize;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        .scroller::before,
+        .scroller::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 250px; /* Length of the lines */
+            border-left: 5px solid white; /* White border on the left side */
+        }
+        .scroller::before {
+            top: -75px; /* Position above the scroller */
+        }
+        .scroller::after {
+            bottom: -75px; /* Position below the scroller */
+        }
+        /* Box container and individual boxes */
+        .box-container {
+            display: flex;
+            overflow-x: auto; /* Enables horizontal scrolling */
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            padding: 10px 0; /* Padding to prevent boxes from being cut off */
+            white-space: nowrap; /* Prevents wrapping to the next line */
+        }
+        .box {
+            flex: 0 0 auto; /* Prevents shrinking and allows horizontal scroll */
+            height: 100px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            min-width: 120px;
+            max-width: 180px;
+        }
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Responsive adjustments */
+        @media screen and (max-width: 600px) {
+            .box {
+                min-width: 100px; /* Adjust minimum width for smaller screens */
+            }
+            .wrapper {
+                height: 200px; /* Adjust image height for smaller screens */
+            }
+            .scroller {
+                width: 30px;
+                height: 30px;
+            }
+            .scroller::before, .scroller::after {
+                height: 100px;
+            }
+        }
+               .color-reds {
+            color: white;
+        }
+        .social-media a {
+            margin: 0 10px; /* Space between icons */
+            color: white; /* Change icon color */
+            font-size: 24px; /* Size of icons */
+        }
+        .social-media a:hover {
+            color: red;
+        }
+        .back-g
+        {
+            background-color: rgb(136 134 134); /* Card background color */
+            color: white;
+            border-radius: 5px;
+        }
+        .transparent-bg {
+    background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+    padding: 20px; /* Add padding for better spacing */
+    border-radius: 8px; /* Optional: Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+.nex
+{
+    text-decoration: none;
+    color: white;
+}
+       
+    </style>
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head
+<body>
+    <!-- Navigation Toggle Button -->
+ 
+    <button class="nav-toggle" onclick="toggleNav()">☰</button>
+    <span href="#home"><span class="color-fix position_set"><h4><span class="color-red">V</span>ineet</h4> </span></span>
+    <!-- Circular Image for Mobile View -->
+    <img src="p1.png" alt="Nav Image" class="nav-image">
+
+    <!-- Combined Navigation -->
+    <div class="nav-container" id="navContainer">
+        <div class="center-links">
+            <a href="#home"><span class="color-fix position"><h4><span class="color-red">V</span>ineet</h4> </span></a>
+            <a href="#home"><span class="color-fix ">Home </span></a>
+            <a href="#about"><span class="color-fix">About Us</span></a>
+            <a href="#Services"><span class="color-fix">Services</span></a>
+            <a href="#work"><span class="color-fix">Work</span></a>
+            <a href="#project"><span class="color-fix">Project</span></a>
+            <a href="#achi"><span class="color-fix">Achievements</span></a>
+            <a href="#Contact"><span class="color-fix">Contact</span></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+<div class="main-content" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 d-flex flex-column align-items-center text-center set">
+                <h4>Web Developer</h4>
+                <h1><span class="color-red">H</span>i, I'm <span class="color-red">Vineet <br></span>Singh From India.</h1>
+                <h5>Email I.d : vineet8090v@gmail.com</h5>
+            </div>
+            
+            <div class="col-sm-6">
+                <img src="icon.png" alt="" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>About Me</h1>
+                <p>I a'm Vineet Singh,  Software Engineer from India. With a passion for technology and coding, I have been developing my skills in software development, focusing on web technologies. My expertise lies in working with programming languages like PHP and Python  as well as frameworks such as  Laravel and Dajngo.</p> 
+                <h5>Html || Css || Java Script || Ajax || Jquery || Sql || Mysql.</h5>
+                </div>
+            <div class="col-sm-6">
+                <div class="tab-container">
+                    <ul class="tab-links">
+                        <li class="active"><a href="#tab1" onclick="openTab(event, 'tab1')">Skills</a></li>
+                        <li><a href="#tab2" onclick="openTab(event, 'tab2')">Experience</a></li>
+                        <li><a href="#tab3" onclick="openTab(event, 'tab3')">Education</a></li>
+                    </ul>
+            
+                    <div class="tab-content">
+                        <div id="tab1" class="tab active">
+                            <p class="color-red">Web Development</p>
+                            <p>Web development involves creating  dynamic || Static websites .</p>
+                            <p>Using Frameworks : Laravel || Django</p>
+                            
+                        </div>
+                        <div id="tab2" class="tab">
+                            <span class="color-red">Software Engineer.</span><br>
+                            <span><a href="https://webvire.com/" style="text-decoration: none; color: white;">Webvire Software Solution || Lucknow 01-july-2024 </a></span>
+                            <br>    
+                            <span class="color-red">Summer Traning</span><br>
+                            <span><a href="https://digicoders.in/" style="text-decoration: none; color: white;">Digicoders technologies Pvt. Ltd  || Lucknow 01-july-2023 to 15-sep-2023 </a></span>
+                           <br> <span><a href="" style="text-decoration: none; color: white;">Python With Django.</a></span>
+                          <br> <span class="color-red">Summer Traning</span><br>
+                           <span><a href="http://www.softproindia.in/" style="text-decoration: none; color: white;">Softpro India || Lucknow 01-july-2022 to 01-sep-2022 </a></span>
+                          <br> <span><a href="" style="text-decoration: none; color: white;"> Core PHP || Laravel</a></span>
+
+
+                            </div>
+                        <div id="tab3" class="tab">
+                            <span class="color-red">Student || CSE </span><br>
+                            <span><a href="http://csjmgpa.in/" style="text-decoration: none; color: white;">Completed  Diploma in Computer Science and Engineering ||  C.S.J.M Govt. Polytechnic, Ambedkar Nagar 
+                                Uttar Pradesh. (Oct 2021 - Jul 2024) </a></span>
+                            <br>
+                            <span class="color-red">XII || (UP BOARD) </span><br>
+                            <span><a href="https://www.facebook.com/MRPInterCollege/" style="text-decoration: none; color: white;">Maharana Pratap Inter College , Uttar Pradesh . (2021) 
+                            </a></span>
+                            <br>  
+                         </div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</section>
+<section id="Services">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center"><span class="color-red">M</span>y Services</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card cards">
+                    <div class="card-icon" style="text-align: left;">
+                       <img src="logo1.png" alt="" height="40px" width="40px" style="background-color:white;">
+                    </div>
+                    <h4>Websites Development</h4>
+                    <p>Using PHP with Laravel  || Python With Django.</p>
+                    <br>
+                         <a href="#" class="learn-more text-start">Learn More</a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card cards">
+                    <div class="card-icon" style="text-align: left;">
+                       <img src="ui-ux.png" alt="" height="40px" width="40px"  >
+                    </div>
+                    <h4>Ui/Ux Design</h4>
+                    <p>
+                        <p>Using Html || Css || Java Script  || Jquery || Bootstrap.</p>
+
+                    </p><a href="#" class="learn-more text-start">Learn More</a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card cards">
+                    <div class="card-icon" style="text-align: left;">
+                       <img src="iot.png" alt="" height="40px" width="40px" style="background-color:white;" >
+                    </div>
+                    <h4>Iot Developer</h4>
+                    <p>Using C++ language.</p>
+                    <br><br>
+                    <a href="#" class="learn-more text-start">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+<section id="work">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="mx-5"><span class="color-red ">M</span>y Work</h3>
+            </div>
+        </div>
+    </div>
+     <div class="container mt-2">
+        <div class="row">
+            <div class="col-sm-12">
+             <!-- Carousel Container -->
+  <div class="container-fluid  py-3">
+    <div id="testimonialCarousel" class="carousel">
+      <div class="carousel-inner">
+        <!-- First Testimonial -->
+        
+        <div class="carousel-item active mx-1">
+          <div class="card shadow-sm rounded-3">
+            <div class="quotes display-2 text-body-tertiary">
+              <i class="bi bi-quote"></i>
+            </div>
+            <a href="https://twish-beauty.com/" class="nex">
+            <div class="card-body">
+              <p class="card-text">Webvire Software Solution || Lucknow</p>
+              <div class="d-flex align-items-center pt-2">
+                <img src="t1.PNG" alt="bootstrap testimonial carousel slider 2" height="40px" width="10px">
+                <div>
+                  <h5 class="card-title fw-bold">Twish-Beauty</h5>
+               
+                </div>
+              </div>
+            </div>
+        </a>
+          </div>
+        </div>
+   
+    
+         <div class="carousel-item ">
+          <div class="card shadow-sm rounded-3">
+            <div class="quotes display-2 text-body-tertiary">
+              <i class="bi bi-quote"></i>
+            </div>
+            <a href="https://5starflow.net/virtualai/" class="nex">
+            <div class="card-body">
+                <p class="card-text">Webvire Software Solution || Lucknow</p>
+                              <div class="d-flex align-items-center pt-2">
+                <img src="d1.PNG" alt="bootstrap testimonial carousel slider 2">
+                <div>
+                  <h5 class="card-title fw-bold">Virtual Furniture </h5>
+                 
+                </div>
+              </div>
+            </div>
+        </a>
+          </div>
+        </div>
+    
+      
+        <div class="carousel-item ">
+            <div class="card shadow-sm rounded-3">
+              <div class="quotes display-2 text-body-tertiary">
+                <i class="bi bi-quote"></i>
+              </div>
+              <a href="https://combizsolutions.co.in/admin/authentication" class="nex">
+              <div class="card-body">
+                <p class="card-text">Webvire Software Solution || Lucknow</p>
+                                <div class="d-flex align-items-center pt-2">
+                  <img src="C1.PNG" alt="bootstrap testimonial carousel slider 2">
+                  <div>
+                    <h5 class="card-title fw-bold">Combizsolutions </h5>
+                   
+                  </div>
+                </div>
+              </div>
+            </a>
+            </div>
+          </div>
+         
+
+        <!-- Add more carousel items here -->
+        <!-- Second Testimonial -->
+        <div class="carousel-item">
+          <div class="card shadow-sm rounded-3">
+            <div class="quotes display-2 text-body-tertiary">
+              <i class="bi bi-quote"></i>
+            </div>
+            <div class="card-body">
+              <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
+              <div class="d-flex align-items-center pt-2">
+                <img src="https://codingyaar.com/wp-content/uploads/square-headshot-2.png" alt="bootstrap testimonial carousel slider 2">
+                <div>
+                  <h5 class="card-title fw-bold">June Doe</h5>
+                  <span class="text-secondary">CEO, Example Company</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+ 
+            </div>
+        </div>
+    </div>
+</section>
+<section id="project">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center"><span class="color-red text-center">M</span>y Projects</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                   <img src="c2.PNG" alt="" class="rounded-4 ">
+                   <p class="pt-1">Usnig Python || Django || MVC Pattern </p>
+                    <a href="https://cofeeshop.bsite.net/" class="learn-more text-start" style="margin-top: -17px;">Project Link</a>
+                </div>
+        
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                   <img src="r1.PNG" alt="" class="rounded-4 ">
+                   <p class="pt-1">Usnig C++ || Arduino </p>
+                    <a href="https://run0time.github.io/Bluetoothcarcontroller/" class="learn-more text-start">Project Link</a>
+                </div>
+        
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                   <img src="r2.PNG" alt="" class="rounded-4 ">
+                   <p class="pt-1">Usnig Python || Django || MVC Pattern </p>
+                    <a href="https://restaurantshop.bsite.net/" class="learn-more text-start" style="margin-top: -18px;">Project Link</a>
+                </div>
+        
+            </div>
+           
+            <div class="col-sm-3">
+                <div class="card">
+                   <img src="l1.PNG" alt="" class="rounded-4 ">
+                    <p class="pt-1">Usnig Core PHP || Dynamic web  </p>
+                    <a href="http://lmssystem.infinityfreeapp.com/" class="learn-more text-start" style="margin-top: 2px;">Project Link</a>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</section>
+<section id="achi">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center"><span class="color-red text-center">M</span>y <span class="color-red text-center">A</span>chievements</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3"></div>
+        <div class="row">
+            <div class="col-sm-10">
+          <center>      
+<div class="container">
+   
+    <div class="wrapper">
+        <div class="before">
+            <img class="content-image" id="beforeImage" src="a1.jpeg" draggable="false" />
+        </div>
+        <div class="after">
+            <img class="content-image" id="afterImage" src="b1.jpeg"false" />
+        </div>
+        <div class="scroller">
+            <svg class="scroller-icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                <polygon points="0 50 37 68 37 32 0 50"></polygon> 
+                <polygon points="100 50 64 32 64 68 100 50"></polygon>
+            </svg>
+        </div>
+    </div>
+
+    <div class="box-container">
+        <div class="box rounded-4" data-before="a1.jpeg" data-after="b1.jpeg">
+            <img src="bb2.jpeg" alt="Image 1">
+        </div>
+        <div class="box rounded-4" data-before="a2.jpeg" data-after="b2.jpeg">
+            <img src="a2.jpeg" alt="Image 1">
+        </div>
+        <div class="box rounded-4" data-before="b3.jpeg" data-after="a3.jpeg">
+            <img src="b3.jpeg" alt="Image 1">
+        </div>
+         
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+    </center>
+</section>
+<section class="mt-5" class="" ">
+
+    <div class="container mt-2 " class="" ">
+        <div class="row">
+        <div class="col-sm-2"></div>
+            <div class="col-sm-4 mt-5">
+ <h3 class="text-center"><span class="color-red">C</span>ontact <span class="color-red">M</span>e</h3>
+                
+                <div class="text-center mt-2">
+                    <!-- Gmail Icon -->
+                    <a href="mailto:vineet8090v@gmail.com" class="text-decoration-none d-block">
+                        <i class="fa fa-envelope color-red" aria-hidden="true"></i>
+                        <span class="" style="color: white;">vineet8090v@gmail.com</span>
+                    </a>
+                    
+                    <!-- Phone Icon -->
+                    <a href="tel:8090980750" class="text-decoration-none d-block mt-2">
+                        <i class="fa fa-phone color-red " aria-hidden="true"></i>
+                        <span style="color: white;" >8090980750</span>
+                    </a>
+
+                    <!-- Social Media Links -->
+                    <div class="social-media mt-3">
+                        <a href="https://www.facebook.com/" target="_blank" class="text-decoration-none">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-decoration-none">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" class="text-decoration-none">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" class="text-decoration-none">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Download CV Button -->
+                    <div>
+                        <a href="path/to/your/cv.pdf" download class="btn btn-danger mt-3">
+                            <!-- <i class="fa fa-download"></i> -->
+                             Download CV
+                        </a>
+                    </div>
+                </div>            </div>
+            <div class="col-sm-4 ">
+             
+         
+                   <form name="submit-to-google-sheet">
+                <div class="form-group mt-3 back-g ">
+                    
+                    <input type="text" name="Name" class="form-control back-g" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group mt-3 back-g">
+                    
+                    <input type="email" name="Email" class="form-control back-g" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group mt-3 back-g">
+                  
+                    <textarea name="Message" class="form-control back-g" rows="4" placeholder="Enter your message"></textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-danger btn-block ">Send Message</button>
+            </form>            </div>
+        </div>
+   
+    </div>
+    <div class="container mt-2"></div>
+</section>
+<footer  id="Contact">  <center> <a href="mailto:vineet8090v@gmail.com" class="text-decoration-none d-block mt-5">
+    <i class="fa fa-envelope color-red" aria-hidden="true"></i>
+    <span class="" style="color: white;">vineet8090v@gmail.com</span
+</a>
+</center>
+</footer>
+
+
+    <script>
+        function toggleNav() {
+            var navContainer = document.getElementById("navContainer");
+            navContainer.classList.toggle("open");
+        }
+    </script>
+    <script>
+        
+    </script>
+     <script>
+        function openTab(evt, tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all tab links
+            const tabLinks = document.querySelectorAll('.tab-links li');
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show the current tab and add active class to the link
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.parentElement.classList.add('active');
+        }
+    </script>
+    
+<script>
+    const scroller = document.querySelector(".scroller");
+    const before = document.querySelector(".before");
+    const after = document.querySelector(".after");
+    const wrapper = document.querySelector(".wrapper");
+    const boxes = document.querySelectorAll(".box");
+
+    wrapper.addEventListener("mousemove", (e) => {
+        const x = e.pageX - wrapper.offsetLeft;
+        scroller.style.left = `${x}px`;
+        before.style.clipPath = `inset(0 ${100 - (x / wrapper.offsetWidth) * 100}% 0 0)`;
+        after.style.clipPath = `inset(0 0 0 ${(x / wrapper.offsetWidth) * 100}%)`;
+    });
+
+    boxes.forEach(box => {
+        box.addEventListener("click", () => {
+            const beforeImage = box.getAttribute("data-before");
+            const afterImage = box.getAttribute("data-after");
+            document.getElementById("beforeImage").src = beforeImage;
+            document.getElementById("afterImage").src = afterImage;
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzsK0HC8PU9V9GEfU8JSRpeWNT4oKU2D0Ip_zvlng6he1x8QHR9u0SuZmPSLrBbdX5NbQ/exec';
+  const form = document.forms['submit-to-google-sheet'];
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Show a loading SweetAlert while processing the submission
+    Swal.fire({
+      title: 'Submitting...',
+      text: 'Please wait while we process your submission.',
+      icon: 'info',
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading(); // Show loading indicator
+
+        // Submit the form data using fetch
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            Swal.fire({
+              title: 'Success!',
+              text: 'i will conect shortly.',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+
+            form.reset(); // Reset the form after successful submission
+          })
+          .catch(error => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'There was a problem submitting your form: ' + error.message,
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+          });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
